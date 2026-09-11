@@ -102,7 +102,7 @@ body {
   bottom: -2px;
   right: -2px;
   background: #561296;
-  color: rgb(255, 255, 255);
+  color: #ffffff;
   font-size: 10px;
   font-weight: bold;
   width: 16px;
@@ -152,7 +152,7 @@ body {
   transition: transform 0.15s ease, fill 0.15s ease, stroke 0.15s ease;
 }
 
-/* Estilos de ativação via JS */
+/* Efeito ativado para o botão de curtir */
 .like-btn.liked {
   color: #ff3040;
 }
@@ -162,6 +162,7 @@ body {
   stroke: #ff3040;
 }
 
+/* Efeito ativado para o botão de salvar */
 .bookmark-btn.bookmarked svg {
   fill: #ffffff;
 }

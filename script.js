@@ -7,15 +7,19 @@ document.addEventListener("DOMContentLoaded", () => {
   const bookmarkBtn = document.querySelector(".bookmark-btn");
 
   let isLiked = false;
-  let baseLikes = 1200; // Alinhado ao valor inicial estático (1.2K)
+  let baseLikes = 0; // Contador iniciando zerado
 
+  // Formata o número (ex: 0, 1, 2, 1.000)
   function formatLikes(num) {
-    if (num >= 1000) {
-      return (num / 1000).toFixed(1) + "K";
-    }
-    return num.toString();
+    return num.toLocaleString("pt-BR");
   }
 
+  // Define o valor inicial como 0 na tela assim que o JS carregar
+  if (likesCountSpan) {
+    likesCountSpan.textContent = formatLikes(baseLikes);
+  }
+
+  // Adiciona curtida (+1)
   function addLike() {
     if (!isLiked) {
       baseLikes++;
@@ -26,6 +30,7 @@ document.addEventListener("DOMContentLoaded", () => {
         likesCountSpan.textContent = formatLikes(baseLikes);
       }
 
+      // Animação de pulso no coração
       const svg = likeBtn.querySelector("svg");
       if (svg) {
         svg.style.transform = "scale(1.3)";
@@ -36,6 +41,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
+  // Remove curtida (-1)
   function removeLike() {
     if (isLiked) {
       isLiked = false;
@@ -48,7 +54,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  // Alterna curtir/descurtir ao clicar no botão
+  // Alterna curtir (0 -> 1) e descurtir (1 -> 0) ao clicar no botão
   likeBtn.addEventListener("click", (e) => {
     e.stopPropagation();
     if (isLiked) {
@@ -58,7 +64,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  // Curte ao clicar na imagem
+  // Curte ao clicar na foto
   if (postMedia) {
     postMedia.addEventListener("click", (e) => {
       e.stopPropagation();
@@ -66,7 +72,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // Alterna o botão de salvar
+  // Botão de salvar
   if (bookmarkBtn) {
     let isBookmarked = false;
     bookmarkBtn.addEventListener("click", (e) => {
